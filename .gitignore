@@ -1,3 +1,6 @@
-YingYang/Library
-YingYang/Temp
-YingYang/Logs
+*
+!.gitignore
+!YingYang/Assets
+!YingYang/Packages
+!YingYang/YingYang.sln
+!YingYang/Assembly-CSharp.csproj
