@@ -12,13 +12,15 @@ public class CharacterController : MonoBehaviour
 
     public int side = 0;
 
+    // Private
     private Vector2 movementDirection;
     private Vector2 rotationDirection;
+    private Vector2 spawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,18 +30,16 @@ public class CharacterController : MonoBehaviour
     }
 
     void FixedUpdate() {
-        // this.Rotate();
         this.Move();
     }
 
     // Methods
     void processInputs()
     {
-        // this.computeRotationDirection();
+        this.getRespawnInput();
         this.computeMovementDirection();
     }
 
-    // Get input data
     void computeMovementDirection()
     {
         float moveAxisX = Input.GetAxisRaw("Horizontal");
@@ -49,12 +49,12 @@ public class CharacterController : MonoBehaviour
         this.movementDirection.Normalize();
     }
 
-    // void computeRotationDirection()
-    // {
-    //     float rotateLeft = System.Convert.ToInt32(Input.GetKey(KeyCode.Q));
-    //     float rotateRight = System.Convert.ToInt32(Input.GetKey(KeyCode.E)) * -1;
-    //     this.rotationDirection = new Vector2(rotateLeft, rotateRight);
-    // }
+    void getRespawnInput()
+    {
+        if (Input.GetKey(KeyCode.Space)) {
+            this.respawn();
+        }
+    }
 
     void Move()
     {
@@ -65,14 +65,13 @@ public class CharacterController : MonoBehaviour
         this.body.velocity = newVelocity * this.side;
     }
 
-    // void Rotate()
-    // {
-    //     float rotationValue = (this.rotationDirection.x + this.rotationDirection.y) * this.rotationSpeed;
-    //     this.body.rotation += (rotationValue * Time.deltaTime);
-    // }
+    void respawn()
+    {
+        gameObject.transform.position = this.spawnPoint;
+    }
 
     // Setters
-    void setMovementSpeed(float newMovementSpeed)
+    public void setMovementSpeed(float newMovementSpeed)
     {
         if (newMovementSpeed < 0) {
             newMovementSpeed = 0;
@@ -80,7 +79,7 @@ public class CharacterController : MonoBehaviour
         this.movementSpeed = newMovementSpeed;
     }
 
-    void setSpeedMultiplier(float newSpeedMultiplier)
+    public void setSpeedMultiplier(float newSpeedMultiplier)
     {
         if (newSpeedMultiplier < 0) {
             newSpeedMultiplier = 0;
@@ -88,13 +87,18 @@ public class CharacterController : MonoBehaviour
         this.speedMultiplier = newSpeedMultiplier;
     }
 
+    public void setSpawnPoint(Vector2 position)
+    {
+        this.spawnPoint = position;
+    }
+
     // Getters
-    float getMovementSpeed()
+    public float getMovementSpeed()
     {
         return this.movementSpeed;
     }
 
-    float getSpeedMultiplier()
+    public float getSpeedMultiplier()
     {
         return this.speedMultiplier;
     }
