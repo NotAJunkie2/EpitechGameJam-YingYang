@@ -1,6 +1,11 @@
-*
 !.gitignore
 !YingYang/Assets
 !YingYang/Packages
 !YingYang/YingYang.sln
 !YingYang/ProjectSettings
+.vscode
+Library
+Temp
+Packages
+Logs
+*.csproj
