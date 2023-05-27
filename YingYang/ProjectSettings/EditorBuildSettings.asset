@@ -7,8 +7,17 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
+    guid: 4205aa08e0f7a453f8f1c3b4424f691e
+  - enabled: 1
+    path: Assets/Scenes/LevelOne.unity
+    guid: dda648d2ae3f7421f82f18324501c5ae
+  - enabled: 1
+    path: Assets/Scenes/Pause Menu.unity
+    guid: bc33f0815c87c42d5aeccf3e5baecc67
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
     guid: 17ead61f7f8ac4d669382b8a918bce9c
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Loose.unity
+    guid: 635ef02ec0fe24bd48f58f1ad50db32e
   m_configObjects: {}
