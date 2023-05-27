@@ -9,3 +9,4 @@ Temp
 Packages
 Logs
 *.csproj
+*.DS_Store
