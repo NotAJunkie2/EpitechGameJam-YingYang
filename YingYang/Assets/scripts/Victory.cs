@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Victory : MonoBehaviour
 {
     public void QuitGame() {
-        Debug.Log("Quit");
         Application.Quit();
     }
 
