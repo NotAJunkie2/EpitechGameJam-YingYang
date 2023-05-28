@@ -10,6 +10,6 @@ public class Victory : MonoBehaviour
     }
 
     public void MainMenuScene() {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 }

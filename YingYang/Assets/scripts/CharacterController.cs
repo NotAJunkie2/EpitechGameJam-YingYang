@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class CharacterController : MonoBehaviour
     public float speedMultiplier = 1f;
     public float rotationSpeed = 1f;
     public int side = 0;
+    public GameObject pauseMenu;
+    public GameObject game;
 
     // Private
+    private bool isPaused = false;
     private Vector2 movementDirection;
     private Vector2 rotationDirection;
     private Vector2 spawnPoint;
@@ -20,7 +24,7 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        this.pauseMenu.SetActive(this.isPaused);
     }
 
     // Update is called once per frame
@@ -36,6 +40,10 @@ public class CharacterController : MonoBehaviour
     // Methods
     void processInputs()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            this.Pause();
+        }
+
         this.getRespawnInput();
         this.computeMovementDirection();
     }
@@ -56,7 +64,8 @@ public class CharacterController : MonoBehaviour
     void getRespawnInput()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            this.respawn();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // this.respawn();
         }
     }
 
@@ -67,6 +76,33 @@ public class CharacterController : MonoBehaviour
 
         Vector2 newVelocity = new Vector2(velocityX * Time.fixedDeltaTime, velocityY * Time.fixedDeltaTime);
         this.body.velocity = newVelocity * this.side;
+    }
+
+    void Pause()
+    {
+        if (this.isPaused) {
+            this.isPaused = false;
+            this.pauseMenu.SetActive(false);
+            this.game.SetActive(true);
+        } else {
+            this.isPaused = true;
+            this.pauseMenu.SetActive(true);
+            this.game.SetActive(false);
+        }
+    }
+
+    public void setPause(bool pause)
+    {
+        this.isPaused = pause;
+        if (this.isPaused) {
+            this.isPaused = true;
+            this.pauseMenu.SetActive(true);
+            this.game.SetActive(false);
+        } else {
+            this.isPaused = false;
+            this.pauseMenu.SetActive(false);
+            this.game.SetActive(true);
+        }
     }
 
     void respawn()
@@ -82,6 +118,7 @@ public class CharacterController : MonoBehaviour
             this.canMove = false;
             this.body.transform.position = collider.transform.position;
             gameObject.transform.localScale *= 2;
+            SceneManager.LoadScene("Victory");
         } else {
             this.respawn();
             this.other.respawn();

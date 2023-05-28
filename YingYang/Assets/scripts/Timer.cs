@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class Timer : MonoBehaviour
 
     private IEnumerator updateTimer()
     {
-        while (remainingDuration >= 0) {
+        while (this.remainingDuration >= 0) {
             if (!this.pause) {
                 uiFill.fillAmount = Mathf.InverseLerp(0, this.durationSeconds, this.remainingDuration);
                 remainingDuration -= 0.100f;
@@ -40,9 +41,16 @@ public class Timer : MonoBehaviour
         this.pause = pause;
     }
 
+    public void resume()
+    {
+        this.pause = false;
+        StartCoroutine(this.updateTimer());
+    }
+
     private void OnEnd()
     {
         // do something
+        SceneManager.LoadScene("Game Over");
         return;
     }
 }

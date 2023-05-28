@@ -5,11 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public CharacterController character;
+    public CharacterController character2;
+    public Timer timer;
+
     public void ResumeGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Debug.Log("Unpause");
+        character.setPause(false);
+        character2.setPause(false);
+        timer.resume();
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
     public void MainMenuScene() {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
     public void QuitGame() {
         Application.Quit();
